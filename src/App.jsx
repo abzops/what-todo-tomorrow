@@ -1,10 +1,15 @@
-import './App.css';
+import "./App.css";
+import Header from "./Components/Header/Header";
+import { ThemeProvider } from "@mui/material";
+import CustomTheme from "./Theme/Theme";
 
 function App() {
   return (
-    <div className="App">
-      <h1>hii</h1>
-    </div>
+    <ThemeProvider theme={CustomTheme}>
+      <div>
+        <Header />
+      </div>
+    </ThemeProvider>
   );
 }
 
