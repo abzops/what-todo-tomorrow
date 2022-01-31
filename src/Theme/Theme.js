@@ -1,20 +1,32 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
-  const CustomTheme = createTheme({
-    palette: {
-      primary: {
-        light: "#9ece5b",
-        main: "#86c232",
-        dark: "#5d8723",
-        contrastText: "#86c232",
-      },
-      secondary: {
-        light: "#4e5153",
-        main: "#222629",
-        dark: "#171a1c",
-        contrastText: "#000",
-      },
+let theme = createTheme();
+theme = responsiveFontSizes(theme);
+const CustomTheme = createTheme({
+  palette: {
+    primary: {
+      light: "#ef4b4c",
+      main: "#ef4b4c",
+      dark: "171a1c",
+      contrastText: "#fff",
     },
-  });
+    secondary: {
+      light: "#42506b",
+      main: "#2a3950",
+      dark: "#171a1c",
+      contrastText: "#fff",
+    },
+    background: {
+      default: "#171a1c",
+    },
+    fontSize: "1.1rem",
+    "@media (min-width:600px)": {
+      fontSize: "1.5rem",
+    },
+    [theme.breakpoints.up("md")]: {
+      fontSize: "2.4rem",
+    },
+  },
+});
 
- export default CustomTheme
+export default CustomTheme;

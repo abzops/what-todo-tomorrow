@@ -1,10 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import Context from "./store/FirebaseContext";
 
 ReactDOM.render(
-  <React.StrictMode>
-      <App />
-  </React.StrictMode>,
+  <Context>
+    <App />
+  </Context>,
   document.getElementById("root")
 );
