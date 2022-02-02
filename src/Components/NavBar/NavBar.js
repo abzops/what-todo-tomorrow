@@ -51,7 +51,7 @@ function NavBar() {
           label="Account"
           value="Account"
           component={Link}
-          to={"/"}
+          to={"/profile"}
           icon={
             <AccountCircleIcon sx={{ boxShadow: 3, borderRadius: "70%" }} />
           }

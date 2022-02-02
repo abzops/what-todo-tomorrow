@@ -11,6 +11,9 @@ import ArrowCircleRightSharpIcon from "@mui/icons-material/ArrowCircleRightSharp
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../store/FirebaseContext";
+import { auth } from "../../Firebase/Config";
+import { onAuthStateChanged } from "firebase/auth";
+import Loading from "../Loading/Loading";
 
 function GetStarted() {
   const [uid, setUid] = useState("");
@@ -34,9 +37,10 @@ function GetStarted() {
   const [ac2, setAc2] = useState("");
   const [ac3, setAc3] = useState("");
   const [add, setAdd] = useState();
-
+  const [showLoading, setShowLoading] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
+    setShowLoading(true);
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -46,23 +50,14 @@ function GetStarted() {
           .updateProfile({
             displayName: username,
           })
-          .then(() => {
-            console.log("user authentication completed");
-            setJump(false);
-            console.log(result.user);
-          })
-          .then(() => {
-            firebase
-              .auth()
-              .signInWithEmailAndPassword(email, password)
-              .catch(() => {
-                alert("Email or Password is not valid");
-              });
-            console.log("users other data's added");
-          });
+          .then(console.log("user authentication completed"));
+      })
+      .catch((error) => {
+        alert(error.message);
       });
+    setJump(false);
+    setShowLoading(false);
   };
-
   const handleChange = (event) => {
     setSchool(event.target.value);
   };
@@ -98,6 +93,7 @@ function GetStarted() {
 
   useEffect(() => {
     if (add == "true") {
+      setShowLoading(true);
       db.collection("users").add({
         id: idCode,
         username,
@@ -109,8 +105,8 @@ function GetStarted() {
         division,
         uid,
       });
-      console.log("fuck");
       setAdd("");
+      setShowLoading(false);
     }
   }, [add]);
 
@@ -155,6 +151,7 @@ function GetStarted() {
         height: "100vh",
       }}
     >
+      {showLoading ? <Loading /> : null}
       {jump ? (
         <>
           <Container
