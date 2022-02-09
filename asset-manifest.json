@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/what-todo-tomorrow/static/css/main.47ea5ff9.css",
+    "main.js": "/what-todo-tomorrow/static/js/main.8a7fc538.js",
+    "index.html": "/what-todo-tomorrow/index.html",
+    "main.47ea5ff9.css.map": "/what-todo-tomorrow/static/css/main.47ea5ff9.css.map",
+    "main.8a7fc538.js.map": "/what-todo-tomorrow/static/js/main.8a7fc538.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.47ea5ff9.css",
+    "static/js/main.8a7fc538.js"
+  ]
+}
