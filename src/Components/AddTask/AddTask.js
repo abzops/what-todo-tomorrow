@@ -1,177 +1,184 @@
-import * as React from "react";
+import React from "react";
 import "./AddTask.css";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemText from "@mui/material/ListItemText";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import FolderIcon from "@mui/icons-material/Folder";
-import DeleteIcon from "@mui/icons-material/Delete";
-import {
-  Container,
-  FormControl,
-  ListItemButton,
-  MenuItem,
-  TextField,
-} from "@mui/material";
-import  Navbar from "../NavBar/NavBar";
-const currencies = [
-  {
-    value: "ENGLISH",
-  },
-  {
-    value: "MATHS",
-  },
-  {
-    value: "PHYSICS",
-  },
-  {
-    value: "CHEMISTRY",
-  },
-  {
-    value: "ZOOLOGY",
-  },
-  {
-    value: "BOTANY",
-  },
-  {
-    value: "MALAYALAM",
-  },
-  {
-    value: "ARABIC",
-  },
-];
+import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
+import { Container, TextField } from "@mui/material";
+import Navbar from "../NavBar/NavBar";
+import { useState } from "react";
+import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
+import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
+import CancelIcon from "@mui/icons-material/Cancel";
 function AddTask() {
-  const [currency, setCurrency] = React.useState("");
-  const handleChange = (event) => {
-    setCurrency(event.target.value);
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [dlt, setDlt] = useState();
+  const handleImageChange = (e) => {
+    // console.log(e.target.files[])
+    if (e.target.files) {
+      const filesArray = Array.from(e.target.files).map((file) =>
+        URL.createObjectURL(file)
+      );
+
+      // console.log("filesArray: ", filesArray);
+
+      setSelectedFiles((prevImages) => prevImages.concat(filesArray));
+      Array.from(e.target.files).map(
+        (file) => URL.revokeObjectURL(file) // avoid memory leak
+      );
+      setShow(true);
+    }
   };
+
+  var x = selectedFiles.length;
+  var y = x - 1;
+  const [i, setI] = useState(0);
+
+  if (i <  0) {
+    setI(0);
+  }
+  
+  if (i) {
+    if (i > y) {
+      setI(y);
+    }
+  }
+  const remove = () => {
+    
+    const all = selectedFiles;
+    all.splice(i, 1);
+    setSelectedFiles(all)
+  };
+  console.log(i);
+  const [show, setShow] = useState(false);
   return (
     <div>
-      <Container
-        className="mainContainer"
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          padding: "20px",
-        }}
-        maxWidth="md"
-      >
-        <main>
-          <figure>
-            <picture class="imagePic">
-              <source
-                media="(min-width: 768px)"
-                srcset="https://image.freepik.com/free-vector/coloured-working-scene_1009-224.jpg"
-                sizes="360px"
-              />
-              <source
-                srcset="https://image.freepik.com/free-vector/coloured-working-scene_1009-224.jpg"
-                sizes="(min-width: 320px) 290px,
-                      (min-width: 480px) 435px
-                      (min-width: 640px) 580px"
-              />
-              <img
-                src="https://image.freepik.com/free-vector/coloured-working-scene_1009-224.jpg"
-                alt="Citymap illustration"
-              />
-            </picture>
-          </figure>
-          <div class="headline">
-            <h2 class="text-headline">Add Work</h2>
-            <h3 class="text-subheadline">Add the works todo for tomorrow</h3>
-          </div>
-          <form>
-            <TextField
-              id="standard-basic"
-              label="Title"
-              variant="standard"
-              size="small"
-              color="primary"
-              fullWidth
-            />
-            <TextField
-              fullWidth
-              size="small"
-              id="standard-select-currency"
-              variant="standard"
-              select
-              label="Subject"
-              select
-              value={currency}
-              onChange={handleChange}
-              sx={{ marginTop: "20px" }}
-            >
-              {currencies.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.value}
-                </MenuItem>
-              ))}
-            </TextField>
-            <TextField
-              multiline
-              rows={4}
-              label="Description"
-              variant="standard"
-              size="small"
-              color="primary"
-              fullWidth
-            />
-            <div className="buttonDiv">
-              <input
-                class="text-small-uppercase"
-                id="submit"
-                type="submit"
-                value="Add now"
-              />
-            </div>
-          </form>
-        </main>
-
-        <List
-          dense
+      <div className="pMain">
+        <Container
+          className="mainContainer "
           sx={{
-            width: "100%",
-            maxWidth: 360,
-            color: "secondary.contrastText",
-            borderRadius: "10px",
-            marginTop: "10px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            padding: "20px",
           }}
+          maxWidth="xs"
         >
-          <ListItem
-            secondaryAction={
-              <IconButton edge="end" aria-label="delete">
-                <DeleteIcon />
-              </IconButton>
-            }
-            disablePadding
-            sx={{
-              bgcolor: "secondary.light",
-              borderRadius: "10px",
-              marginTop: "0px",
-              height: "50px",
-              boxShadow: 3,
-            }}
-          >
-            <ListItemButton>
-              <ListItemAvatar>
-                <Avatar>
-                  <FolderIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                sx={{ color: "primary.contrastText" }}
-                primary="Do maths home work"
-              />
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </Container>
-      <Navbar/>
+          <div className="addTask">
+            <div className="heading">
+              <span>Add Task</span>
+              <div className="line"></div>
+            </div>
+            <div className="title">
+              <div className="input">
+                <TextField
+                  id="standard-basic"
+                  label="Title"
+                  variant="standard"
+                  size="small"
+                  color="primary"
+                  fullWidth
+                />
+              </div>
+            </div>
+            <div className="subject">
+              <div className="input">
+                <TextField
+                  id="standard-basic"
+                  label="subject"
+                  variant="standard"
+                  size="small"
+                  color="primary"
+                  fullWidth
+                />
+              </div>
+            </div>
+            <div className="description">
+              <div className="input">
+                <TextField
+                  multiline
+                  rows={4}
+                  label="Description"
+                  variant="standard"
+                  size="small"
+                  color="primary"
+                  fullWidth
+                />
+              </div>
+            </div>
+            <div className="addPic">
+              <div className="input">
+                <div className="ph">
+                  <span>Add Photo</span>
+                  <label htmlFor="add">
+                    <AddAPhotoIcon fontSize="medium" sx={{ color: "#666" }} />
+                  </label>
+                  <input
+                    type="file"
+                    style={{ display: "none" }}
+                    id="add"
+                    onChange={handleImageChange}
+                    multiple
+                  />
+                </div>
+                {show ? (
+                  <>
+                    <div
+                      className="image"
+                      style={{ backgroundImage: `url(${selectedFiles[i]})` }}
+                    >
+                      <ArrowCircleLeftIcon
+                        fontSize="medium"
+                        sx={{
+                          color: "#ef4b4c",
+                          backgroundColor: "#fff",
+                          borderRadius: "50%",
+                        }}
+                        onClick={() => {
+                          setI(i - 1);
+                        }}
+                      />
+
+                      <CancelIcon
+                        fontSize="3rem"
+                        style={{
+                          color: "#ef4b4c",
+                          margin: "0",
+                          marginBottom: "82px",
+                          marginLeft: "171px",
+                          backgroundColor: "#fff",
+                          borderRadius: "50%",
+                        }}
+                        onClick={remove}
+                      />
+                      <ArrowCircleRightIcon
+                        fontSize="medium"
+                        sx={{
+                          color: "#ef4b4c",
+                          backgroundColor: "#fff",
+                          borderRadius: "50%",
+                        }}
+                        onClick={() => {
+                          setI(i + 1);
+                        }}
+                      />
+                    </div>
+                  </>
+                ) : null}
+              </div>
+            </div>
+            <div className="submit">
+              <div className="buttonDiv">
+                <input
+                  class="text-small-uppercase"
+                  id="submit"
+                  type="submit"
+                  value="Submit"
+                />
+              </div>
+            </div>
+          </div>
+        </Container>
+      </div>
+      <Navbar />
     </div>
   );
 }

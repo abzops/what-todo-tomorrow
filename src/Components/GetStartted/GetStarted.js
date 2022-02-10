@@ -14,8 +14,12 @@ import { AuthContext } from "../../store/FirebaseContext";
 import { auth } from "../../Firebase/Config";
 import { onAuthStateChanged } from "firebase/auth";
 import Loading from "../Loading/Loading";
+import { useNavigate } from "react-router";
 
 function GetStarted() {
+  const navigate = useNavigate();
+  const { setStatus, userDetails, status } = useContext(AuthContext);
+
   const [uid, setUid] = useState("");
   const [showSchool, setShowSchool] = useState("");
   const [showCourse, setShowCourse] = useState("hide");
@@ -54,8 +58,11 @@ function GetStarted() {
       })
       .catch((error) => {
         alert(error.message);
+      })
+      .then(() => {
+        setAdd("true");
       });
-    setJump(false);
+
     setShowLoading(false);
   };
   const handleChange = (event) => {
@@ -104,10 +111,13 @@ function GetStarted() {
         course,
         division,
         uid,
+        status: true,
       });
       setAdd("");
       setShowLoading(false);
+      alert("All Done");
     }
+   
   }, [add]);
 
   var idCode = school.concat(course, division);
@@ -132,7 +142,7 @@ function GetStarted() {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        alert("Logged In");
+        navigate("/");
       })
       .catch(() => {
         alert("Email or Password is not valid");
@@ -194,8 +204,14 @@ function GetStarted() {
                 </picture>
               </figure>
 
-              <form className="form" onSubmit={handleSubmit}>
+              <form
+                className="form"
+                onSubmit={() => {
+                  setJump(false);
+                }}
+              >
                 <TextField
+                  required
                   id="standard-basic"
                   label="Username"
                   type="text"
@@ -208,6 +224,7 @@ function GetStarted() {
                   }}
                 />
                 <TextField
+                  required
                   id="standard"
                   label="Email"
                   variant="standard"
@@ -220,6 +237,7 @@ function GetStarted() {
                   }}
                 />
                 <TextField
+                  required
                   id="standard"
                   label="Password"
                   variant="standard"
@@ -311,6 +329,7 @@ function GetStarted() {
 
               <form className="form">
                 <TextField
+                  required
                   id="standard"
                   label="Email"
                   variant="standard"
@@ -323,6 +342,7 @@ function GetStarted() {
                   }}
                 />
                 <TextField
+                  required
                   id="standard"
                   label="Password"
                   variant="standard"
@@ -408,6 +428,7 @@ function GetStarted() {
                 }}
               >
                 <TextField
+                  required
                   fullWidth
                   size="medium"
                   id="standard-select-currency"
@@ -480,6 +501,7 @@ function GetStarted() {
                 }}
               >
                 <TextField
+                  required
                   fullWidth
                   size="medium"
                   id="standard-select-currency"
@@ -554,6 +576,7 @@ function GetStarted() {
                 }}
               >
                 <TextField
+                  required
                   fullWidth
                   size="medium"
                   id="standard-select-currency"
@@ -587,7 +610,6 @@ function GetStarted() {
                   color="secondary"
                   sx={{ fontSize: "50px" }}
                   onClick={() => {
-                    setAdd("true");
                     setShowDivision("hide");
                     setDot("hide1");
                     setShowWelcome("fade");
@@ -662,9 +684,9 @@ function GetStarted() {
             >
               WELCOME {username}
             </Typography>
-            <Link style={{ textDecoration: "none" }} to="/">
-              <Button variant="contained">Get Started</Button>
-            </Link>
+            <Button variant="contained" onClick={handleSubmit}>
+              Get Started
+            </Button>
           </Container>
         </>
       )}

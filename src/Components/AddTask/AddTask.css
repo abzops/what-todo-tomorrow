@@ -1,208 +1,110 @@
-/* Structure */
-
-img {
-  height: auto;
+.addTask {
+  height: 581px;
   width: 100%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+  margin-bottom: 50px;
+  box-shadow: rgb(0 0 0 / 25%) 0px 25px 50px -12px;
 }
-
-input[type="submit"] {
-  background: #e9e9eb;
-  height: 2.75rem;
-  margin: 1em auto auto;
+.addTask .line {
+  background-color: #ef4b4c;
 }
-
-
-
-
-
-figure {
-  overflow: hidden;
-  position: relative;
+.addTask .heading {
   width: 100%;
-  height: 15rem;
-  background-color: black;
+  height: 12%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+}
+.addTask .title {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 15px;
+}
+.addTask .subject {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.addTask .description {
+  width: 100%;
+  height: 22%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.addTask .addPic {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.addTask .submit {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@media (min-width: 768px) {
-  figure {
-    float: left;
-    height: 100%;
-    position: relative;
-    width: 50%;
-  }
-}
-
-form {
-  overflow: hidden;
-  padding: 10%;
-  position: relative;
+.input {
   width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
 }
-
-@media (min-width: 768px) {
-  form {
-    float: left;
-    height: 78%;
-    padding: 6%;
-    width: 38%;
-  }
+.ph span {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.4375em;
+  letter-spacing: 0.00938em;
+  color: #666;
 }
-
-main {
-  margin: 30px auto auto;
-  overflow: hidden;
-  position: relative;
-  width: 90%;
+.heading span {
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 1.4375em;
+  letter-spacing: 0.00938em;
+  color: #666;
 }
-
-@media (min-width: 768px) {
-  main {
-    height: 21rem;
-    top: 50%;
-    width: 42.5rem;
-  }
-}
-
-.headline {
-  position: absolute;
-  top: 8vw;
+.input .ph {
+  height: 50px;
   width: 100%;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
 }
-
-@media (min-width: 768px) {
-  .headline {
-    position: absolute;
-    top: 3.4rem;
-    width: 50%;
-  }
+.input .image {
+  height: 110px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  overflow-x: scroll;
+  background-size: contain,cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
-
-/* Skin */
-
-* {
-  margin: 0;
-  padding: 0;
+.image img {
+  width: 195px;
 }
-
-input[type="email"]:required,
-input[type="text"]:required {
-  box-shadow: none;
-  outline: none;
+.clear svg {
+  margin: 0 !important;
 }
+.clear {
+  display: flex;
+  justify-content: flex-end;
+  width: 86%;
 
-input[type="submit"] {
-  background: #ef4b4c;
-  border: none;
-  color: #ffffff;
-  padding: 0 2rem;
-  border-radius: 10px;
-  
-}
-
-input[type="submit"]:hover,
-input[type="submit"]:focus {
-  background: #e65454;
-  cursor: pointer;
-  outline: none;
-}
-
-.inputs--filled label {
-  transform: translate(0, 0);
-}
-
-.inputs--invalid input {
-  animation: shake 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-  background: url(https://image.freepik.com/free-vector/coloured-working-scene_1009-224.jpg)
-    center right no-repeat;
-  border-bottom: 2px solid #ef4b4c;
-  box-shadow: none;
-  color: #ef4b4c;
-  transform: translate3d(0, 0, 0);
-}
-
-@keyframes shake {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-
-  33% {
-    transform: translate3d(-6px, 0, 0);
-  }
-
-  66% {
-    transform: translate3d(6px, 0, 0);
-  }
-}
-
-.inputs--invalid label {
-  color: #ef4b4c;
-}
-
-label {
-  display: inline-block;
-  transform: translate(0, 1.25rem);
-  transition: 0.15s;
-}
-
-main {
-  background: #f9f6ed;
-  border-radius: 0.25rem;
-  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.1);
-}
-
-.text-headline {
-  color: #e9e9eb;
-  letter-spacing: 0.4rem;
-  font: 700 1.4em "Montserrat";
-  text-align: center;
-  text-transform: uppercase;
-  text-shadow: black;
-}
-
-@media (min-width: 768px) {
-  .text-headline {
-    font: 700 1.625rem "Montserrat";
-  }
-}
-
-.text-body {
-  color: #354c58;
-  font: 700 16px "Montserrat", sans-serif;
-}
-
-.text-small-uppercase {
-  color: #2a3950;
-  font: 700 0.75rem "Montserrat";
-  letter-spacing: 0.08rem;
-  text-transform: uppercase;
-}
-
-.text-subheadline {
-  color: #e9e9eb;
-  left: -0.17rem;
-  letter-spacing: 0.143rem;
-  font: 700 0.652rem "Montserrat";
-  margin-bottom: 1.5rem;
-  position: relative;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-@media (min-width: 768px) {
-  .text-subheadline {
-    font: 700 0.75rem "Montserrat";
-  }
-}
-
-img {
-  opacity: 0.5;
-}
-.buttonDiv{
-    display: flex;
-    align-items: center;
-    transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-.buttonDiv:hover{
-  transform: scale(1.2);
 }

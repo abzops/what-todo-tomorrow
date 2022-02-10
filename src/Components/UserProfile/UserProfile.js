@@ -6,14 +6,23 @@ import { AuthContext } from "../../store/FirebaseContext";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import FormatListBulletedRoundedIcon from "@mui/icons-material/FormatListBulletedRounded";
-import EventNoteRoundedIcon from "@mui/icons-material/EventNoteRounded";
+import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
+import LogoutIcon from "@mui/icons-material/Logout";
+import firebase from "firebase/compat/app";
+import { useNavigate } from "react-router";
 
 function UserProfile() {
   const { user, userDetails } = useContext(AuthContext);
   const [viewProfile, setViewProfile] = useState(false);
   const [editProfile, setEditProfile] = useState(false);
   const [account, setAccount] = useState(true);
+  const navigate = useNavigate();
+  const logout = () => {
+    firebase.auth().signOut();
+    navigate("/");
+    window.location.reload(false);
+  };
   return (
     <div className="pMain">
       {account && (
@@ -28,69 +37,92 @@ function UserProfile() {
           }}
           maxWidth="xs"
         >
-          <div className="up">
-            <div className="dp">
-              <img
-                src="https://funnyness.com/sites/default/files/images/i/12-2015/2-dog-funny-animals.jpg"
-                alt=""
-              />
+          <div className="viewProfile">
+            <div className="up">
+              <div className="dp">
+                <img
+                  src="https://funnyness.com/sites/default/files/images/i/12-2015/2-dog-funny-animals.jpg"
+                  alt=""
+                />
+              </div>
+              <p
+                onClick={() => {
+                  setViewProfile(true);
+                  setAccount(false);
+                }}
+              >
+                View Profile
+              </p>
+              <h2>{userDetails.username}</h2>
+              <div className="line" />
             </div>
-            <p
-              onClick={() => {
-                setViewProfile(true);
-                setAccount(false);
-              }}
-            >
-              View Profile
-            </p>
-            <h2>{userDetails.username}</h2>
-            <div className="line" />
-          </div>
 
-          <div className="down">
-            <div className="options">
-              <div className="leftIcon">
-                <ManageAccountsIcon fontSize="large" color="secondary" />
+            <div className="down">
+              <div className="options">
+                <div className="leftIcon">
+                  <ManageAccountsIcon fontSize="large" color="secondary" />
+                </div>
+                <div className="centerPart">
+                  <span className="optionText">Manage Account</span>
+                </div>
+                <div className="RightArrow">
+                  <ArrowForwardIosRoundedIcon
+                    fontSize="medium"
+                    color="secondary"
+                  />
+                </div>
               </div>
-              <div className="centerPart">
-                <span className="optionText">Manage Account</span>
+              <div className="options">
+                <div className="leftIcon">
+                  <FormatListBulletedRoundedIcon
+                    fontSize="large"
+                    color="secondary"
+                  />
+                </div>
+                <div className="centerPart">
+                  <span className="optionText">Things ToDo</span>
+                </div>
+                <div className="RightArrow">
+                  <ArrowForwardIosRoundedIcon
+                    fontSize="medium"
+                    color="secondary"
+                  />
+                </div>
               </div>
-              <div className="RightArrow">
-                <ArrowForwardIosRoundedIcon
-                  fontSize="medium"
-                  color="secondary"
-                />
+              <div className="options">
+                <div className="leftIcon">
+                  <InfoRoundedIcon fontSize="large" color="secondary" />
+                </div>
+                <div className="centerPart">
+                  <span className="optionText">About Us</span>
+                </div>
+                <div className="RightArrow">
+                  <ArrowForwardIosRoundedIcon
+                    fontSize="medium"
+                    color="secondary"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="options">
-              <div className="leftIcon">
-                <FormatListBulletedRoundedIcon
-                  fontSize="large"
-                  color="secondary"
-                />
-              </div>
-              <div className="centerPart">
-                <span className="optionText">Things ToDo</span>
-              </div>
-              <div className="RightArrow">
-                <ArrowForwardIosRoundedIcon
-                  fontSize="medium"
-                  color="secondary"
-                />
-              </div>
-            </div>
-            <div className="options">
-              <div className="leftIcon">
-                <EventNoteRoundedIcon fontSize="large" color="secondary" />
-              </div>
-              <div className="centerPart">
-                <span className="optionText">Events</span>
-              </div>
-              <div className="RightArrow">
-                <ArrowForwardIosRoundedIcon
-                  fontSize="medium"
-                  color="secondary"
-                />
+              <div className="options">
+                <div className="leftIcon">
+                  <LogoutIcon
+                    fontSize="large"
+                    color="secondary"
+                    onClick={logout}
+                  />
+                </div>
+                <div className="centerPart">
+                  <span className="optionText" onClick={logout}>
+                    Logout
+                  </span>
+                </div>
+                <div className="RightArrow">
+                  <ArrowForwardIosRoundedIcon
+                    fontSize="medium"
+                    color="secondary"
+                    onClick={logout}
+                  />
+                </div>
               </div>
             </div>
           </div>

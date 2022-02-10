@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./home.css";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -9,60 +9,65 @@ import Typography from "@mui/material/Typography";
 import { Container, ListItemButton } from "@mui/material";
 import CreateRoundedIcon from "@mui/icons-material/CreateRounded";
 import Navbar from "../NavBar/NavBar";
+import GetStarted from "../GetStartted/GetStarted";
+import { AuthContext } from "../../store/FirebaseContext";
+import Loading from "../Loading/Loading";
 
 function Home() {
+  const { userDetails,status } = useContext(AuthContext);
   return (
     <div>
-      <Container
-        className="mainContainer"
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          padding: "20px",
-        }}
-        maxWidth="md"
-      >
-        <Typography
-          className="heading"
-          variant="h4"
-          component="h4"
-          sx={{ color: "primary.contrastText" }}
-        >
-          What Todo For Tomorrow?
-        </Typography>
-        <List
-          dense
+      {status ? (
+        <Container
+          className="mainContainer"
           sx={{
-            width: "100%",
-            maxWidth: 360,
-            color: "primary.contrastText",
-
-            borderRadius: "10px",
-            marginTop: "10px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            padding: "20px",
           }}
+          maxWidth="md"
         >
-          <ListItem
-            secondaryAction={<Checkbox edge="end" />}
-            disablePadding
+          <Typography
+            className="heading"
+            variant="h4"
+            component="h4"
+            sx={{ color: "primary.contrastText" }}
+          >
+            What Todo For Tomorrow?
+          </Typography>
+          <List
+            dense
             sx={{
+              width: "100%",
+              maxWidth: 360,
+              color: "primary.contrastText",
+
               borderRadius: "10px",
-              marginTop: "0px",
-              height: "50px",
-              boxShadow: 3,
-              bgcolor: "secondary.light",
+              marginTop: "10px",
             }}
           >
-            <ListItemButton>
-              <ListItemIcon>
-                <CreateRoundedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Do maths home work" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        {/* <Grid item xs={12} md={6}>
+            <ListItem
+              secondaryAction={<Checkbox edge="end" />}
+              disablePadding
+              sx={{
+                borderRadius: "10px",
+                marginTop: "0px",
+                height: "50px",
+                boxShadow: 3,
+                bgcolor: "secondary.light",
+              }}
+            >
+              <ListItemButton>
+                <ListItemIcon>
+                  <CreateRoundedIcon />
+                </ListItemIcon>
+                <ListItemText primary="Do maths home work" />
+              </ListItemButton>
+            </ListItem>
+          </List>
+          {/* <Grid item xs={12} md={6}>
           <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
             Avatar with text and icon
           </Typography>
@@ -90,8 +95,11 @@ function Home() {
             </List>
           </Demo>
         </Grid> */}
-        <Navbar />
-      </Container>
+          <Navbar />
+        </Container>
+      ) : (
+        <GetStarted />
+      )}
     </div>
   );
 }
