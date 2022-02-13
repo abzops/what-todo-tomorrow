@@ -1,9 +1,8 @@
 .addTask {
-  height: 581px;
+  height: 450px;
   width: 100%;
   background-color: rgb(255, 255, 255);
   border-radius: 15px;
-  margin-bottom: 50px;
   box-shadow: rgb(0 0 0 / 25%) 0px 25px 50px -12px;
 }
 .addTask .line {
@@ -11,7 +10,7 @@
 }
 .addTask .heading {
   width: 100%;
-  height: 12%;
+  height: 18%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -19,7 +18,7 @@
 }
 .addTask .title {
   width: 100%;
-  height: 10%;
+  height: 12%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -27,28 +26,27 @@
 }
 .addTask .subject {
   width: 100%;
-  height: 10%;
+  height: 12%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
 }
 .addTask .description {
   width: 100%;
-  height: 22%;
+  height: 28%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
 }
 .addTask .addPic {
   width: 100%;
-  height: 30%;
+  height: 10%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .addTask .submit {
   width: 100%;
-  height: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,6 +65,16 @@
   line-height: 1.4375em;
   letter-spacing: 0.00938em;
   color: #666;
+}
+.ph .selected {
+  background-color: #ef4b4c;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
 }
 .heading span {
   font-weight: 400;
@@ -92,7 +100,7 @@
   flex-direction: row;
   justify-content: space-between;
   overflow-x: scroll;
-  background-size: contain,cover;
+  background-size: contain, cover;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -106,5 +114,98 @@
   display: flex;
   justify-content: flex-end;
   width: 86%;
+}
+.imageDiv {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.imageDivChild {
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  height: 75%;
+  width: 40%;
+  overflow-y: scroll !important;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+.imageDivChild .images {
+  width: 80%;
+  height: auto;
+  position: relative;
+}
+.imageDivChild .images .imagesChild {
+  position: relative;
+}
+.imageDivChild .images .imagesChild .deleteIcon {
+  width: 100%;
+  height: 100%;
+  background-color: #ef4b4b7a;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: .3s cubic-bezier(0.4, 0, 1, 1);
+}
+.imageDivChild .images .imagesChild .deleteIcon:hover {
+  opacity: 1;
+}
+.imageDivChild .images .imagesChild .deleteIcon svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  color: white;
+  font-size: 56px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+.imageDivChild svg {
+  margin: 0;
+  padding-right: 46px;
+  padding-left: 16px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.imageDivChild .head {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.imageDivChild .images img {
+  width: 100%;
+  height: auto;
+  margin: 5px;
+}
 
+.imageDivChild button {
+  position: fixed;
+  width: 14rem;
+  height: 3rem;
+  background-color: #ef4b4c;
+  border: none;
+  border-radius: 15px;
+  font-size: 27px;
+  color: white;
+  bottom: 8rem;
+}
+
+@media (max-width: 600px) {
+  .imageDivChild img {
+    width: 100%;
+    height: auto;
+    margin: 5px;
+  }
+  .imageDivChild {
+    width: 95%;
+  }
 }
